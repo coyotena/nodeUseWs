@@ -16,3 +16,6 @@ console.log(__dirname);
 console.log(path.basename("E:\nodejs\zhufeng\nodeUseWs\js\6file\8path.js"/*,".js"*/));
 //获取一个陆经理文件的扩展名
 console.log(path.extname("E:\nodejs\zhufeng\nodeUseWs\js\6file\8path.js"));
+//从一个相对路径解析出一个绝对路径
+//以应用程序所在的目录为根
+console.log(path.resolve("book","node.json","..","mysql.json"))
