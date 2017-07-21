@@ -12,9 +12,12 @@ var path = require("path");
 var mime = require("mime");
 var server = http.createServer(function(request, response){
     var url = request.url;
+    if(url == "/"){
+        url = "/index.html";
+    }
     console.log(path.extname(url));
     // response.setHeader("Content-Type",mime[path.extname(url)]+";charset=utf-8");
-    response.setHeader("Content-Type",mime.lookup(request.url)+";charset=utf-8");
+    response.setHeader("Content-Type",mime.lookup(url)+";charset=utf-8");
     fs.readFile("." + url,"utf8",function(err,data){
         if(!err){
             response.write(data);
