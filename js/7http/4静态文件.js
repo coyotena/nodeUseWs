@@ -37,6 +37,17 @@ var server = http.createServer(function(request, response){
             }
 
         });
+    }else if(url =="/index.js"){
+        response.setHeader("Content-Type","text/javascript;charset=utf-8");
+        fs.readFile("./index.js","utf8",function(err,data){
+            if(err){
+                return err;
+            }else{
+                response.write(data);
+                response.end();
+            }
+
+        });
     }
 });
 server.listen(8080,"localhost");
