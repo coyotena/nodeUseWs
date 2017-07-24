@@ -26,19 +26,25 @@
             username:username,
             age:age
         };
-        var tbody = document.querySelector("tbody");
         var xhr = new XMLHttpRequest();
         xhr.open("POST","/reg",true);
+        //设置响应类型，会自动转化xhr.response转成对应的类型
+        xhr.responseType = "json";//取值：""空字符串，json,text此时response与responseText相同;响应内容使用response
         xhr.onreadystatechange = function(){
             if(xhr.readyState == 4){
                 if(xhr.status == 200){
-                    var usersArr = JSON.parse(xhr.responseText);
-//                    console.log(usersArr);
-                    var str = "";
-                    for(var i = 0; i < usersArr.length; i++){
-                        str += "<tr><td>"+usersArr[i].username+"</td><td>"+usersArr[i].age+"</td></tr>"
-                    }
-                    tbody.innerHTML=str;
+//                    var users = JSON.parse(xhr.responseText);
+                    var users = xhr.response;
+                    console.log(users);
+                    var tbody = document.querySelector("tbody");
+                    var tr = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var td2 = document.createElement("td");
+                    td1.innerHTML = users.username;
+                    td2.innerHTML = users.age;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tbody.appendChild(tr);
                 }
             }
         }
