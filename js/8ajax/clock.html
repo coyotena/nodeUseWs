@@ -15,9 +15,13 @@
             xhr.open("get","/clock",true);
             //3 指定接收响应的回调函数，注册当状态变化之后的回调函数
             xhr.onreadystatechange = function(){
-                alert(xhr.readyState);
+                console.log(xhr.readyState);
+                //当状态为4的时候，也就是响应接收完毕
+                if(xhr.readyState == 4){
+                    document.querySelector("#clock").innerHTML = xhr.responseText;
+                }
             }
-            //指定请求发送数据
+            //指定请求体发送数据
             xhr.send();
         },1000);
     }
