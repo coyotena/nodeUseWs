@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+用户名：<input type="text" name = "username"><br>
+年龄：<input type="text" name = "age"><br>
+<input type="button" onclick = "reg()" value="注册">
+<table>
+    <thead>
+    <tr>
+        <th>用户名</th>
+        <th>年龄</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script>
+    function reg(){
+        var username = document.querySelector("input[name='username']").value;
+        var age = document.querySelector("input[name='age']").value;
+        var user = {
+            username:username,
+            age:age
+        };
+        var tbody = document.querySelector("tbody");
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST","/reg",true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status == 200){
+                    var usersArr = JSON.parse(xhr.responseText);
+//                    console.log(usersArr);
+                    var str = "";
+                    for(var i = 0; i < usersArr.length; i++){
+                        str += "<tr><td>"+usersArr[i].username+"</td><td>"+usersArr[i].age+"</td></tr>"
+                    }
+                    tbody.innerHTML=str;
+                }
+            }
+        }
+        xhr.send(JSON.stringify(user));
+    }
+
+</script>
+</body>
+</html>

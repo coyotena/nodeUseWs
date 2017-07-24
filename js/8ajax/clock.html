@@ -18,7 +18,12 @@
                 console.log(xhr.readyState);
                 //当状态为4的时候，也就是响应接收完毕
                 if(xhr.readyState == 4){
-                    document.querySelector("#clock").innerHTML = xhr.responseText;
+                    if(xhr.status == 200){
+                        document.querySelector("#clock").innerHTML = xhr.responseText;
+                    }else{
+                        document.querySelector("#clock").innerHTML = xhr.statusText;
+                    }
+
                 }
             }
             //指定请求体发送数据

@@ -14,6 +14,7 @@ var server = http.createServer(function(request, response){
         });
     }else if(urlObj.pathname == "/clock"){
         response.end(new Date().toLocaleString());
+
     }
 
 });
