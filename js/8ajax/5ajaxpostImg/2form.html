@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" name="form" method="post" enctype="multipart/form-data">
+    用户名：<input type="text" name = "username"><br>
+    密码：<input type="text" name = "password"><br>
+    头像：<input type="file" name = "imgtx"><br>
+    <input type="submit" value="注册sub">
+    <input type="button" value="注册btn" id="regBtn">
+</form>
+<script>
+    window.onload = function(){
+        document.querySelector("#regBtn").addEventListener("click",function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","/reg2",true);
+//            xhr.responseType = "text";
+//        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        console.log(xhr.responseText);
+                    }
+                }
+            }
+            var formData = new FormData();
+            formData.append("username",document.querySelector("input[name='username']").value);
+            formData.append("password",document.querySelector("input[name='password']").value);
+            var imgtx = document.querySelector("input[name='imgtx']");
+            formData.append("imgtx",imgtx.files[0]);
+            xhr.send(formData);
+        });
+
+    }
+</script>
+</body>
+</html>
