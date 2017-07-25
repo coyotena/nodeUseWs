@@ -5,6 +5,7 @@ var http = require("http");
 var url = require("url");
 var fs = require("fs");
 var querystring = require("querystring");
+//只有当submit提交form表单，并且是GET请求的时候，浏览器才会把表单进行序列化拼到URL后面
 var server = http.createServer(function(request, response){
     response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
     var urlObj = url.parse(request.url,true);
