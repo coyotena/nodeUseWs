@@ -33,7 +33,7 @@ var server = http.createServer(function(request, response){
             response.writeHead(200, {'content-type': 'text/plain'});
             response.write('received upload:\n\n');
             //inspect是把对象转成字符串
-            console.log(util.inspect({fields: fields, files: files}));
+            // response.end({fields: fields, files: files}.toString());//相当于
             response.end(util.inspect({fields: fields, files: files}));
         });
     }

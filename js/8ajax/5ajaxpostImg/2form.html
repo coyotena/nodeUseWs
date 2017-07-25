@@ -27,7 +27,9 @@
                     }
                 }
             }
+            //准备发送给服务器的数据
             var formData = new FormData();
+            //给这个表单对象增加一个表单元素值
             formData.append("username",document.querySelector("input[name='username']").value);
             formData.append("password",document.querySelector("input[name='password']").value);
             var imgtx = document.querySelector("input[name='imgtx']");
