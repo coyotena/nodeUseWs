@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" name="form" method="post" enctype="multipart/form-data">
+    用户名：<input type="text" name = "username"><br>
+    密码：<input type="text" name = "password"><br>
+    头像：<input type="file" name = "imgtx"><br>
+    <input type="submit" value="注册sub">
+    <input type="button" value="注册btn" id="regBtn">
+</form>
+<img src="uploadImg/innerHTML属性.png">
+<script>
+    window.onload = function(){
+        document.querySelector("#regBtn").addEventListener("click",function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","/reg2",true);
+//            xhr.responseType = "text";
+//        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        console.log(xhr.responseText);
+                        var oImg = document.createElement("img");
+                        oImg.src = xhr.responseText;
+                        document.body.appendChild(oImg);
+                        //把上传后的文件显示出来
+                        /**
+                         * 1.在服务器端，把files里的imgtx里的path读出来，复制到uploadImg目录下
+                         * 2.把此图片的路径返回浏览器端
+                         * 3.浏览器端构建一个img元素，追加到body上，并且制定img的src属性
+                         * 4.服务器端可以接收客户端发出的请求图片的请求，返回图片的内容
+                         */
+                    }
+                }
+            }
+            //准备发送给服务器的数据
+            var formData = new FormData();
+            //给这个表单对象增加一个表单元素值
+            formData.append("username",document.querySelector("input[name='username']").value);
+            formData.append("password",document.querySelector("input[name='password']").value);
+            var imgtx = document.querySelector("input[name='imgtx']");
+            formData.append("imgtx",imgtx.files[0]);
+            xhr.send(formData);
+        });
+
+    }
+</script>
+</body>
+</html>
