@@ -9,6 +9,10 @@ var users = [];
  2.服务器接收到后追加到users数组中
  3.服务器返回users数组，在客户端打印出来
  */
+/**
+ requet 是一个可读流 ondata onend pipe
+ response 是一个可读可写流 ondata onend pipe write end
+ */
 http.createServer(function(req, res){
     console.log(req.method);//方法
     console.log(req.headers);//请求头
