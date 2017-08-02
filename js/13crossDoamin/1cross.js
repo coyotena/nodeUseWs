@@ -9,6 +9,7 @@ var server = http.createServer(function(req, res){
         result += data;
     });
     req.on("end",function(){
+        console.log(result);
         users.push(JSON.parse(result));
         console.log(users);
         //设置响应头，允许哪个来源来访问我这个服务器
