@@ -3,7 +3,6 @@
  */
 var http = require("http");
 var fs = require("fs");
-var users = [];
 var server = http.createServer(function(req, res){
     if(req.url == "/"){
         fs.createReadStream("./1index.html").pipe(res);
@@ -23,12 +22,14 @@ var server = http.createServer(function(req, res){
                 headers:{}
             };
             var request = http.request(options,function(response){
+                var users = [];
                 var user = "";
                 response.on("data",function(data){
                     user += data;
                 });
                 response.on("end",function(){
                     users.push(JSON.parse(user));
+                    console.log(users)
                     res.end(JSON.stringify(users));
                 });
             });
