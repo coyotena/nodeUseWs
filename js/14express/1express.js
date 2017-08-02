@@ -12,6 +12,11 @@ var app = express();//app其实是一个配置对象
 app.get("/",function(req, res){
     //send可以自动判断参数类型，自动转换响应信息
     //并且自动设置Content-Type
+    res.send("hello home");
+});
+app.get("/hello",function(req, res){
+    //send可以自动判断参数类型，自动转换响应信息
+    //并且自动设置Content-Type
     res.send("hello world");
 });
 //启动服务器
