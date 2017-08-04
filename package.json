@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coyotena/nodeUseWs.git"
+    "url": "git+https://github.com/coyotena/nodeusews.git"
   },
   "keywords": [
     "coyote"
@@ -22,7 +22,7 @@
   "author": "coyote",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/coyotena/nodeUseWs/issues"
+    "url": "https://github.com/coyotena/nodeusews/issues"
   },
-  "homepage": "https://github.com/coyotena/nodeUseWs#readme"
+  "homepage": "https://github.com/coyotena/nodeusews#readme"
 }
