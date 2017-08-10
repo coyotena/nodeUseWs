@@ -88,7 +88,33 @@ app.put("/users/:id",function(req, res){
         res.send({msg:"更新资源失败"});
     }
 });
+//局部更新 请求体里只传要更新的字段
+app.patch("/users/:id", function(req, res){
+    var updataFileds = req.body;
+    if(updataFileds){
+        for(var i = 0; i< users.length; i++){
+            //判断当前用户和用户传进来要更新的用户id是否一致
+            if(users[i].id == req.params.id){
+                /*
+                users[i] = updataFileds;
+                users[i].id = req.params.id;
+                */
+                for(var attr in updataFileds){
+                    //用新的值替换旧的值
+                    if(updataFileds.hasOwnProperty(attr)){
+                        users[i][attr] = updataFileds[attr];
 
+                    }
+                }
+                res.send(users[i]);
+                break;
+            }
+        }
+
+    }else{
+        res.send({msg: "更新资源失败"});
+    }
+});
 
 app.listen(8080);
 
