@@ -72,6 +72,23 @@ app.post("/users", function(req, res){
         res.send({msg:"增加资源失败"});
     }
 });
+//整体更新全部属性
+app.put("/users/:id",function(req, res){
+    var putUser = req.body;
+    if(putUser){
+        for(var i = 0; i< users.length; i++){
+            //判断当前用户和用户传进来要更新的用户id是否一致
+            if(users[i].id == req.params.id){
+                users[i] = putUser;//把老的对象整体替换成新的对象
+                break;
+            }
+        }
+        res.send(putUser);
+    }else{
+        res.send({msg:"更新资源失败"});
+    }
+});
+
 
 app.listen(8080);
 
