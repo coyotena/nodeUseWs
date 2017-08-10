@@ -5,7 +5,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser")
 //存放所有的用户
-var users = [{id:1,name:"coyote"},{id:2,name:"coyote2"}];
+var users = [{id:1,name:"coyote",mny:100},{id:2,name:"coyote2",mny:100}];
 /**
  * 查询所有用户
  */
@@ -15,6 +15,7 @@ app.set("view engine","ejs");
 app.set("views",__dirname);
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.raw());//
 
 //1.获取所有的用户  get/collection，collection数据数组，此处是users
 //请求地址     http://localhost:8080/users
@@ -114,6 +115,26 @@ app.patch("/users/:id", function(req, res){
     }else{
         res.send({msg: "更新资源失败"});
     }
+});
+
+//删除
+app.delete("/users/:id", function(req, res){
+    for(var i = 0; i < users.length; i++){
+        if(users[i].id == req.params.id){
+            users.splice(i,1);
+            res.send({});
+            return;
+        }
+    }
+    /*users = users.filter(function(user){//顾虑
+        return user.id != req.params.id;
+    });*/
+    res.send({msg:"删除失败"})
+});
+
+//以资源为中间 URL里不要包含动词
+app.post("/transaction/:fromId/:toId", function(req, res){
+    var money = req.body.money;
 });
 
 app.listen(8080);
